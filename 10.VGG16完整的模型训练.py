@@ -11,7 +11,7 @@ from model import *
 '''
 使用GPU进行训练
 方式一： cuda()
-方式二：
+方式二：一般此方式居多
     device=torch.device("cpu") 或"cuda"
     模型、损失函数、数据   例：model=model.to(device)
     

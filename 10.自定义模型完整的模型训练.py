@@ -8,6 +8,7 @@ from torch.utils.tensorboard import SummaryWriter
 import time
 from model import *
 
+# 与10.VGG16完整的模型训练.py  只有很小的改动，可以比较代码查看
 '''
 使用GPU进行训练
 方式一： .cuda()
