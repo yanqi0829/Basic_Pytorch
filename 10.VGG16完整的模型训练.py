@@ -14,6 +14,9 @@ from model import *
 方式二：
     device=torch.device("cpu") 或"cuda"
     模型、损失函数、数据   例：model=model.to(device)
+    
+完整的训练套路：
+ 
 '''
 
 # 准备数据集
