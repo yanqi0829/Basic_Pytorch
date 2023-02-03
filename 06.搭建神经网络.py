@@ -77,6 +77,7 @@ test_set = torchvision.datasets.CIFAR10(root="./dataset", train=False, transform
 dataloader = DataLoader(dataset=test_set, batch_size=64, shuffle=True, num_workers=0, drop_last=False)
 loss = nn.CrossEntropyLoss()  # 分类问题损失函数
 '''
+torch.optim 
 优化器：
     SGD   随机梯度下降
 '''
@@ -90,6 +91,29 @@ for epoch in range(20):
         # print(result_loss)
         optim.zero_grad()  # 梯度设置为0
         result_loss.backward()  # 反向传播，【求梯度】  卷积层或线性层的 weight和bias 下看到梯度值grad
-        optim.step()  # 参数调优
-        running_loss = running_loss + result_loss
+        optim.step()  # 参数调优， 参数会进行变化，有的值可能变化不大，多执行几次断点
+        running_loss = running_loss + result_loss #这里计算每轮的loss
     print(running_loss)
+    '''
+    print(running_loss) 每轮的输出结果如下
+        tensor(360.5676, grad_fn=<AddBackward0>)
+        tensor(356.7508, grad_fn=<AddBackward0>)
+        tensor(341.7326, grad_fn=<AddBackward0>)
+        tensor(318.2594, grad_fn=<AddBackward0>)
+        tensor(309.9871, grad_fn=<AddBackward0>)
+        tensor(301.5600, grad_fn=<AddBackward0>)
+        tensor(293.2404, grad_fn=<AddBackward0>)
+        tensor(284.1416, grad_fn=<AddBackward0>)
+        tensor(278.7745, grad_fn=<AddBackward0>)
+        tensor(272.6930, grad_fn=<AddBackward0>)
+        tensor(267.6430, grad_fn=<AddBackward0>)
+        tensor(262.0797, grad_fn=<AddBackward0>)
+        tensor(257.9688, grad_fn=<AddBackward0>)
+        tensor(253.5258, grad_fn=<AddBackward0>)
+        tensor(247.9718, grad_fn=<AddBackward0>)
+        tensor(243.9755, grad_fn=<AddBackward0>)
+        tensor(240.3479, grad_fn=<AddBackward0>)
+        tensor(236.4041, grad_fn=<AddBackward0>)
+        tensor(232.9967, grad_fn=<AddBackward0>)
+        tensor(230.7793, grad_fn=<AddBackward0>)
+    '''
