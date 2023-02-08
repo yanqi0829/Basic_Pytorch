@@ -57,7 +57,7 @@ class MyModel(nn.Module):
         super(MyModel, self).__init__()
         '''
          卷积  in_channels输入通道   out_channels输出通道      kernel_size卷积核大小  stride横向纵向步长
-              卷积核，偏置无需指定大小，具体的值是通过分布采样得到的；其实初始值是多少并不重要，训练的过程就是对这些值的调整
+              卷积核，偏置的值无需指定大小，具体的值是通过分布采样得到的；其实初始值是多少并不重要，训练的过程就是对这些值的调整
               输出图像的宽高 官网有计算公式 
         '''
         self.conv1 = Conv2d(in_channels=3, out_channels=6, kernel_size=3, stride=1, padding=0)

@@ -10,16 +10,17 @@ from model import *
 
 '''
 使用GPU进行训练
-方式一： cuda()
-方式二：一般此方式居多
-    device=torch.device("cpu") 或"cuda"
-    模型、损失函数、数据   例：model=model.to(device)
-    
-完整的训练套路：
- 
-'''
+方式一：网络模型  数据（输入，标注） 损失函数     进行.cuda()
 
-# 准备数据集
+方式二：.to   一般此方式居多   -------------本页以此为例
+
+    device=torch.device("cpu") 或
+    device=torch.device("cuda:0")
+    模型、损失函数、数据   例：model=model.to(device)
+'''
+# 定义训练的设备
+device = torch.device("cuda:0")
+# 步骤1：准备数据集
 from torch.utils.data import DataLoader
 
 train_data = torchvision.datasets.CIFAR10(root="./dataset", train=True, transform=torchvision.transforms.ToTensor(),
@@ -38,10 +39,10 @@ test_dataloader = DataLoader(test_data, batch_size=64)
 model = torchvision.models.vgg16(weights="DEFAULT",
                                  progress=True)
 model.classifier.add_module("add_linear", nn.Linear(1000, 10))
-model = model.cuda()
+model = model.to(device)  # 到这个设备上
 # 损失函数
 loss_fn = nn.CrossEntropyLoss()
-loss_fn = loss_fn.cuda()
+loss_fn = loss_fn.to(device)
 # 优化器
 learning_rate = 0.01
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
@@ -75,8 +76,8 @@ for i in range(epoch):
     model.train()
     for data in train_dataloader:
         imgs, targets = data
-        imgs = imgs.cuda()
-        targets = targets.cuda()
+        imgs = imgs.to(device)
+        targets = targets.to(device)
         outputs = model(imgs)
         loss = loss_fn(outputs, targets)
         # 优化器优化模型
@@ -100,8 +101,8 @@ for i in range(epoch):
     with torch.no_grad():
         for data in test_dataloader:
             imgs, targets = data
-            imgs = imgs.cuda()
-            targets = targets.cuda()
+            imgs = imgs.to(device)
+            targets = targets.to(device)
             outputs = model(imgs)
             loss = loss_fn(outputs, targets)
             total_test_loss += loss.item()

@@ -17,7 +17,7 @@ writer = SummaryWriter("logs") #文件夹路径
         writer.close()
 '''
 
-# 可以是numpy，Tensor等类型  通常①opencv读取图片  或② PIL读取转成numpy
+# 可以是numpy，Tensor等类型
 image_path = "hymenoptera_data/train/ants/6240329_72c01e663e.jpg"
 image_PIL = Image.open(image_path)
 # image_PIL.show()

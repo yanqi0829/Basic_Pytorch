@@ -6,7 +6,7 @@ from PIL import Image
 
 '''
 继承Dataset类
-__getitem__    __len__ 为必须实现的方法 
+__getitem__    __len__ 为必须实现的方法
 提供一种方式获取数据及其label   和告知总共有多少数据
 '''
 '''
