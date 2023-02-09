@@ -34,4 +34,4 @@ with torch.no_grad():  # 节约内存 性能
 print(output)
 print(output.argmax(1))
 end=time.time()
-print(f"cost time {(end-start)}s") #GPU  1.67s   CPU:   0.007s
+print(f"cost time {(end-start)}s") #CPU  1.67s   GPU:   0.007s
