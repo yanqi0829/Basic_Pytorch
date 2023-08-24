@@ -8,10 +8,11 @@ from PIL import Image
 transforms的结构及用法
     transforms.py相当于一个工具箱，看其Structure 有许多class类
 '''
+# 执行 tensorboard --logdir=logs/transforms
 
-# ----------------------------ToTensor-----------------------------------
+# ----------------------------①ToTensor-----------------------------------
 '''
-Convert a ``PIL Image`` or ``numpy.ndarray`` to tensor
+Convert a ``PIL Image`` or ``numpy.ndarray(Opencv读取的)`` to tensor
 '''
 image_path = "images/haizei.jpg"
 img = Image.open(image_path)
@@ -21,7 +22,7 @@ tensor_img = trans_totensor(img)  # 名称()”可以理解为是“对象.__cal
 # print(tensor_img)
 
 # TensorBoard 使用Tensor展示图片
-writer = SummaryWriter("logs")
+writer = SummaryWriter("logs/transforms")
 writer.add_image("ToTensor", tensor_img)
 
 # ----------------------------Normalize归一化-----------------------------------
@@ -58,4 +59,5 @@ trans_compose2 = transforms.Compose([trans_random, trans_totensor])
 for i in range(10):
     img_crop = trans_compose2(img)
     writer.add_image("RandomCrop随机裁剪", img_crop, i)
+
 writer.close()

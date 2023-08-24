@@ -23,15 +23,16 @@ image_PIL = Image.open(image_path)
 # image_PIL.show()
 img_array = np.array(image_PIL)
 print(type(img_array))
-
+img_array.shape
 '''
-add_image注释中可见
-    照片类型   img_tensor (torch.Tensor, numpy.array, or string/blobname): Image data
+①add_image注释中可见
+    照片类型  Tensor  或  numpy-array
 '''
 #从PIL到numpy，需要在add_image中指定 shape中每个数字表示的含义
-# writer.add_image("test1234", img_array, 0, dataformats='HWC')
+# writer.add_image("test1234", img_array, 0, dataformats='HWC') ,要指定shape格式
 writer.add_image("测试tensorboard存照片", img_array, 1, dataformats='HWC')
+writer.add_image("测试tensorboard存照片", img_array, 2, dataformats='HWC')
 
 for i in range(100):
-# tag（标题）, scalar_value（y轴）,global_step(x轴)
+# ②add_scalar   tag（标题）, scalar_value（y轴）,global_step(x轴步长)
     writer.add_scalar("y=2x", 2 * i, i)
