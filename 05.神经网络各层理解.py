@@ -36,11 +36,18 @@ torch.nn.functional 的方法有助于了解卷积，不用过多记忆
     input和kernel的数据选取没有什么特殊，和视频讲解保持一致 
 '''
 # 距离 ：输入是5*5的图像
-input = torch.Tensor([[1, 2, 0, 3, 1], [0, 1, 2, 3, 1], [1, 2, 1, 0, 0], [5, 2, 3, 1, 1], [2, 1, 0, 1, 1]])
+input = torch.Tensor([[1, 2, 0, 3, 1],
+                      [0, 1, 2, 3, 1],
+                      [1, 2, 1, 0, 0],
+                      [5, 2, 3, 1, 1],
+                      [2, 1, 0, 1, 1]])
 # 卷积核：是3*3的
-kernel = torch.Tensor([[1, 2, 1], [0, 1, 0], [2, 1, 0]])
+kernel = torch.Tensor([[1, 2, 1],
+                       [0, 1, 0],
+                       [2, 1, 0]])
 
-input = torch.reshape(input, (1, 1, 5, 5))  # （batch_size,channel,宽高)
+#F.conv2d入参要求
+input = torch.reshape(input, (1, 1, 5, 5))  # （batch_size,channel,宽高)  变成了四维 有4个中括号
 kernel = torch.reshape(kernel, (1, 1, 3, 3))
 # F.conv2d     input 输入   kernel 卷积核  stride 移动步长（水平、垂直方向）默认1 ，padding默认 0不填充；1表示四周填充1层，填充0
 output = F.conv2d(input, kernel, stride=1)
@@ -108,3 +115,22 @@ for data in dataloader:
     output = torch.reshape(output, (-1, 3, 30, 30))  # 大于3通道无法显示，-1代表不确定，由计算得出具体值
     writer.add_images("CIFR10_model_conv", output, step)  # 实际上显示的图片个数是64*2  相当于将深度拆了
     step += 1
+
+
+# ----------------------------单独对Relu进行测试 -----------------------------------
+input1 = torch.tensor([[-1, 4, 5], [-2, 0.4, 6], [-4, 7, 45]])
+input1=torch.reshape(input1, (-1, 1, 3, 3))
+print(input1.shape)
+
+
+class XX(nn.Module):
+    def __init__(self):
+        super(XX, self).__init__()
+        self.relu1=ReLU()
+    def forward(self,input):
+        output=self.relu1(input)
+        return output
+
+mm=XX()
+output1=mm(input1)
+print(output1)
