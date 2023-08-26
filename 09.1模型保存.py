@@ -12,5 +12,5 @@ torch.save(vgg16,"vgg16_method1.pth")
 torch.save(vgg16.state_dict(),"vgg16_method2.pth")
 
 '''
-方式2保存的模型会小一点，因为没有网络结构
+方式2保存的模型会小一点（7K），因为没有网络结构
 '''

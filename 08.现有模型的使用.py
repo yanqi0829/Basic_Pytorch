@@ -15,7 +15,7 @@ from torchvision.models import VGG16_Weights
 # vgg16=torchvision.models.vgg16(pretrained=True,progress=True)
 vgg16_true = torchvision.models.vgg16(weights="DEFAULT",
                                       progress=True)  # 下载带参数的模型到  C:\Users\wangyq\.cache\torch\hub\checkpoints
-vgg16_false = torchvision.models.vgg16(progress=True)  # 默认没有预训练权重，只加载模型结构,参数都是分布下的初始化
+vgg16_false = torchvision.models.vgg16(progress=True)  # 默认没有预训练权重，只加载模型结构,参数都是正太分布下的初始化
 print(vgg16_true)  #VGG16的网路架构   可看出模型最终分类是1000个
 
 train_data = torchvision.datasets.CIFAR10(root="./dataset", train=True, transform=torchvision.transforms.ToTensor(),
